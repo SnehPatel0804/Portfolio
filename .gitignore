@@ -15,6 +15,8 @@ node_modules/
 
 # Static build (optional, if generated)
 staticfiles/
+static/images/SNEH_PATEL_Ccy6aJf.jpeg
+static/images/SNEH_PATEL.jpeg
 
 # OS files
 .DS_Store
