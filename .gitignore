@@ -1,4 +1,21 @@
+# Python
 .venv/
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .env
+
+# Django
+db.sqlite3
+media/
+
+# Node
+node_modules/
+
+# Static build (optional, if generated)
+staticfiles/
+
+# OS files
+.DS_Store
+Thumbs.db
