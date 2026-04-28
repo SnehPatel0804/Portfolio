@@ -1,0 +1,68 @@
+{% load static %}
+
+<!-- Page Title / Breadcrumbs -->
+<section class="bg-gray-100 py-10">
+  <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <h1 class="text-3xl font-bold">Certificates</h1>
+
+    <nav class="text-gray-500">
+      <ol class="flex space-x-2">
+        <li>
+          <a href="{% url 'home' %}" class="hover:underline">Home</a>
+        </li>
+        <li>/</li>
+        <li class="font-semibold">{{ item.title }}</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Certificate Details -->
+<section class="py-16">
+  <div class="container mx-auto px-6">
+
+    <div class="flex flex-col md:flex-row gap-2 items-start">
+
+      <!-- ================= LEFT : IMAGE ================= -->
+      <div class="w-full md:w-[65%]">
+  <div class="w-full">
+
+    <!-- Main Image -->
+    <div class="relative w-full aspect-[16/7] overflow-hidden rounded-lg shadow">
+      <img
+        src="{% static 'images/bg.png' %}"
+        alt="{{ item.title }}"
+        class="absolute inset-0 w-full h-full object-cover"
+      >
+    </div>
+
+  </div>
+</div>
+
+      <!-- ================= RIGHT : INFO ================= -->
+      <div class="w-full md:w-[35%] space-y-6">
+
+        <div class="bg-gray-50 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-4 border-b pb-2">
+            Certificate Information
+          </h3>
+
+          <ul class="space-y-2 text-gray-700">
+            <li><strong>Category:</strong> {{ item.category }}</li>
+            <li><strong>Issued By:</strong> {{ item.issuer }}</li>
+            <li><strong>Date:</strong> {{ item.issue_date|date:"d M, Y" }}</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg shadow">
+          <h2 class="text-2xl font-bold mb-3">{{ item.title }}</h2>
+          <p class="text-gray-700 leading-relaxed">
+            {{ item.description }}
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

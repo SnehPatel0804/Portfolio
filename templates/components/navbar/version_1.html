@@ -1,0 +1,216 @@
+{% load static %}
+
+<!-- Mobile Hamburger Button (SVG) -->
+<button
+  id="menu-btn"
+  class="fixed top-4 right-4 z-50 lg:hidden bg-gray-900 text-white p-3 rounded-full shadow"
+
+  aria-label="Toggle navigation"
+>
+  <!-- Hamburger SVG -->
+  <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+       viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round"
+          d="M4 6h16M4 12h16M4 18h16" />
+  </svg>
+</button>
+
+<!-- Sidebar Navbar -->
+<header
+  id="sidebar"
+  class="fixed inset-y-0 left-0 z-40 w-72 bg-gray-900 text-white
+         transform -translate-x-full lg:translate-x-0
+         transition-transform duration-300 ease-in-out
+         flex flex-col items-center pt-8 pb-4"
+>
+
+  <!-- Profile Image -->
+<div class="flex flex-col items-center">
+
+   
+  <div class="w-28 h-28 mb-4">
+    <img
+      src="{% static 'images/sneh.jpeg' %}"
+      alt="Profile"
+      class="w-full h-full rounded-full object-cover border-8 border-gray-700"
+    />
+  </div>
+
+  <!-- Name -->
+   
+  <h1 class="text-2xl font-semibold mb-6">
+     <a href="{% url 'home' %}">
+    {{ profile.name }}
+  </h1>
+</div>
+  <!-- Social Icons (SVG only) -->
+  <div class="mt-auto flex gap-4 mb-8 text-gray-400 pb-2">
+  <a href="https://www.linkedin.com/in/sneh-patel-346831215/" target="_blank" class="text-white bg-gray-700 p-2 rounded-full hover:bg-blue-400  hover:animate-bounce  ">
+            <svg class="w-10 h-10 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor ">
+                <path d="M18.72 3.99997H5.37C5.19793 3.99191 5.02595 4.01786 4.86392 4.07635C4.70189 4.13484 4.55299 4.22471 4.42573 4.34081C4.29848 4.45692 4.19537 4.59699 4.12232 4.75299C4.04927 4.909 4.0077 5.07788 4 5.24997V18.63C4.01008 18.9901 4.15766 19.3328 4.41243 19.5875C4.6672 19.8423 5.00984 19.9899 5.37 20H18.72C19.0701 19.9844 19.4002 19.8322 19.6395 19.5761C19.8788 19.32 20.0082 18.9804 20 18.63V5.24997C20.0029 5.08247 19.9715 4.91616 19.9078 4.76122C19.8441 4.60629 19.7494 4.466 19.6295 4.34895C19.5097 4.23191 19.3672 4.14059 19.2108 4.08058C19.0544 4.02057 18.8874 3.99314 18.72 3.99997ZM9 17.34H6.67V10.21H9V17.34ZM7.89 9.12997C7.72741 9.13564 7.5654 9.10762 7.41416 9.04768C7.26291 8.98774 7.12569 8.89717 7.01113 8.78166C6.89656 8.66615 6.80711 8.5282 6.74841 8.37647C6.6897 8.22474 6.66301 8.06251 6.67 7.89997C6.66281 7.73567 6.69004 7.57169 6.74995 7.41854C6.80986 7.26538 6.90112 7.12644 7.01787 7.01063C7.13463 6.89481 7.2743 6.80468 7.42793 6.74602C7.58157 6.68735 7.74577 6.66145 7.91 6.66997C8.07259 6.66431 8.2346 6.69232 8.38584 6.75226C8.53709 6.8122 8.67431 6.90277 8.78887 7.01828C8.90344 7.13379 8.99289 7.27174 9.05159 7.42347C9.1103 7.5752 9.13699 7.73743 9.13 7.89997C9.13719 8.06427 9.10996 8.22825 9.05005 8.3814C8.99014 8.53456 8.89888 8.6735 8.78213 8.78931C8.66537 8.90513 8.5257 8.99526 8.37207 9.05392C8.21843 9.11259 8.05423 9.13849 7.89 9.12997ZM17.34 17.34H15V13.44C15 12.51 14.67 11.87 13.84 11.87C13.5822 11.8722 13.3313 11.9541 13.1219 12.1045C12.9124 12.2549 12.7546 12.4664 12.67 12.71C12.605 12.8926 12.5778 13.0865 12.59 13.28V17.34H10.29V10.21H12.59V11.21C12.7945 10.8343 13.0988 10.5225 13.4694 10.3089C13.84 10.0954 14.2624 9.98848 14.69 9.99997C16.2 9.99997 17.34 11 17.34 13.13V17.34Z" fill="#fffff"/>
+            </svg>
+          </a>
+
+    <a href="https://github.com/SnehPatel0804" target="_blank" class="text-white bg-gray-700 p-2 rounded-full  hover:bg-blue-400  hover:animate-bounce  ">
+      <!-- Github SVG -->
+      <svg class="w-10 h-10 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor ">
+                 <path d="M12,2A10,10,0,0,0,8.84,21.5c.5.08.66-.23.66-.5V19.31C6.73,19.91,6.14,18,6.14,18A2.69,2.69,0,0,0,5,16.5c-.91-.62.07-.6.07-.6a2.1,2.1,0,0,1,1.53,1,2.15,2.15,0,0,0,2.91.83,2.16,2.16,0,0,1,.63-1.34C8,16.17,5.62,15.31,5.62,11.5a3.87,3.87,0,0,1,1-2.71,3.58,3.58,0,0,1,.1-2.64s.84-.27,2.75,1a9.63,9.63,0,0,1,5,0c1.91-1.29,2.75-1,2.75-1a3.58,3.58,0,0,1,.1,2.64,3.87,3.87,0,0,1,1,2.71c0,3.82-2.34,4.66-4.57,4.91a2.39,2.39,0,0,1,.69,1.85V21c0,.27.16.59.67.5A10,10,0,0,0,12,2Z"/>
+            </svg>
+    </a>
+
+    <!-- <a href="#" class="text-white bg-blue-400 p-2 rounded-full  hover:animate-bounce  ">
+      
+      <svg class="w-5 h-5 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor ">
+                <path
+                    d="M19.633 7.997c.013.175.013.349.013.523 0 5.325-4.053 11.461-11.46 11.461-2.282 0-4.402-.661-6.186-1.809.324.037.636.05.973.05a8.07 8.07 0 0 0 5.001-1.721 4.036 4.036 0 0 1-3.767-2.793c.249.037.499.062.761.062.361 0 .724-.05 1.061-.137a4.027 4.027 0 0 1-3.23-3.953v-.05c.537.299 1.16.486 1.82.511a4.022 4.022 0 0 1-1.796-3.354c0-.748.199-1.434.548-2.032a11.457 11.457 0 0 0 8.306 4.215c-.062-.3-.1-.611-.1-.923a4.026 4.026 0 0 1 4.028-4.028c1.16 0 2.207.486 2.943 1.272a7.957 7.957 0 0 0 2.556-.973 4.02 4.02 0 0 1-1.771 2.22 8.073 8.073 0 0 0 2.319-.624 8.645 8.645 0 0 1-2.019 2.083z"
+                ></path>
+            </svg>
+    </a> -->
+  </div>
+
+  <!-- Navigation -->
+  <nav class="w-full px-6 flex-1">
+    <ul class="space-y-5 text-xl font-medium">
+
+
+      <!-- Nav Item -->
+      <li>
+        <a href="#hero"
+   class="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
+
+  <svg
+    class="w-10 h-10 text-white group-hover:text-blue-400 transition"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M22 22L2 22" />
+    <path d="M2 11L10.1259 4.49931C11.2216 3.62279 12.7784 3.62279 13.8741 4.49931L22 11" />
+    <path d="M15.5 5.5V3.5C15.5 3.22386 15.7239 3 16 3H18.5C18.7761 3 19 3.22386 19 3.5V8.5" />
+    <path d="M4 22V9.5" />
+    <path d="M20 22V9.5" />
+    <path d="M15 22V17C15 15.5858 15 14.8787 14.5607 14.4393C14.1213 14 13.4142 14 12 14C10.5858 14 9.87868 14 9.43934 14.4393C9 14.8787 9 15.5858 9 17V22" />
+    <path d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z" />
+  </svg>
+
+  <span class="text-white">Home</span>
+</a>
+
+      </li>
+
+      <li>
+        <a href="#about"
+   class="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
+
+  <svg
+    class="w-10 h-10 text-white group-hover:text-blue-400 transition"
+    fill="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path d="M14.3365 12.3466L14.0765 11.9195C13.9082 12.022 13.8158 12.2137 13.8405 12.4092C13.8651 12.6046 14.0022 12.7674 14.1907 12.8249L14.3365 12.3466ZM9.6634 12.3466L9.80923 12.8249C9.99769 12.7674 10.1348 12.6046 10.1595 12.4092C10.1841 12.2137 10.0917 12.022 9.92339 11.9195L9.6634 12.3466ZM4.06161 19.002L3.56544 18.9402L4.06161 19.002ZM19.9383 19.002L20.4345 18.9402L19.9383 19.002ZM16 8.5C16 9.94799 15.2309 11.2168 14.0765 11.9195L14.5965 12.7737C16.0365 11.8971 17 10.3113 17 8.5H16ZM12 4.5C14.2091 4.5 16 6.29086 16 8.5H17C17 5.73858 14.7614 3.5 12 3.5V4.5ZM7.99996 8.5C7.99996 6.29086 9.79082 4.5 12 4.5V3.5C9.23854 3.5 6.99996 5.73858 6.99996 8.5H7.99996ZM9.92339 11.9195C8.76904 11.2168 7.99996 9.948 7.99996 8.5H6.99996C6.99996 10.3113 7.96342 11.8971 9.40342 12.7737L9.92339 11.9195ZM9.51758 11.8683C6.36083 12.8309 3.98356 15.5804 3.56544 18.9402L4.55778 19.0637C4.92638 16.1018 7.02381 13.6742 9.80923 12.8249L9.51758 11.8683ZM3.56544 18.9402C3.45493 19.8282 4.19055 20.5 4.99996 20.5V19.5C4.70481 19.5 4.53188 19.2719 4.55778 19.0637L3.56544 18.9402ZM4.99996 20.5H19V19.5H4.99996V20.5ZM19 20.5C19.8094 20.5 20.545 19.8282 20.4345 18.9402L19.4421 19.0637C19.468 19.2719 19.2951 19.5 19 19.5V20.5ZM20.4345 18.9402C20.0164 15.5804 17.6391 12.8309 14.4823 11.8683L14.1907 12.8249C16.9761 13.6742 19.0735 16.1018 19.4421 19.0637L20.4345 18.9402Z"/>
+  </svg>
+
+  <span class="text-white">About</span>
+</a>
+
+      </li>
+
+      <li>
+       <a href="#resume"
+   class="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
+
+  <svg
+    class="w-10 h-10 text-gray-400 group-hover:text-blue-400 transition"
+    fill="currentColor"
+    viewBox="0 0 512 512"
+  >
+    <path d="M276.239,252.183c-6.37,2.127-13.165,3.308-20.239,3.308
+             c-7.074,0-13.87-1.181-20.24-3.308
+             c-46.272,7.599-70.489,41.608-70.489,82.877H256h90.728
+             C346.728,293.791,322.515,259.782,276.239,252.183z"/>
+
+    <path d="M256,240.788c27.43,0,49.658-22.24,49.658-49.666v-14.087
+             c0-27.426-22.228-49.659-49.658-49.659
+             c-27.43,0-49.658,22.233-49.658,49.659v14.087
+             C206.342,218.548,228.57,240.788,256,240.788z"/>
+
+    <path d="M378.4,0H133.582C86.234,0,47.7,38.542,47.7,85.899v340.22
+             C47.7,473.476,86.234,512,133.582,512h205.695h13.175l9.318-9.301
+             l93.229-93.229l9.301-9.31v-13.174V85.899
+             C464.3,38.542,425.766,0,378.4,0z
+             M432.497,386.985H384.35
+             c-24.882,0-45.074,20.183-45.074,45.073v48.139H133.582
+             c-29.866,0-54.078-24.221-54.078-54.078V85.899
+             c0-29.874,24.212-54.096,54.078-54.096H378.4
+             c29.876,0,54.096,24.222,54.096,54.096V386.985z"/>
+  </svg>
+
+  <span>Resume</span>
+</a>
+
+      </li>
+
+      <li>
+       <a href="#portfolio"
+   class="group flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition">
+
+  <svg
+    class="w-10 h-10 text-white group-hover:text-blue-400 transition"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.5"
+    viewBox="0 0 24 24"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M3 3h7v7H3z" />
+<path d="M14 3h7v7h-7z" />
+<path d="M14 14h7v7h-7z" />
+<path d="M3 14h7v7H3z" />
+
+  </svg>
+
+  <span class="text-white">Portfolio</span>
+</a>
+
+      </li>
+
+      <!-- <li>
+        <a href="#services"
+           class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+               viewBox="0 0 24 24">
+            
+          </svg>
+          <span>Services</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#contact"
+           class="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-gray-800 transition">
+          <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2"
+               viewBox="0 0 24 24">
+            
+          </svg>
+          <span>Contact</span>
+        </a>
+      </li> -->
+
+    </ul>
+  </nav>
+
+</header>
+
+<!-- Sidebar Toggle Script -->
+<script>
+  const menuBtn = document.getElementById("menu-btn");
+  const sidebar = document.getElementById("sidebar");
+
+  menuBtn.addEventListener("click", () => {
+    sidebar.classList.toggle("-translate-x-full");
+  });
+</script>

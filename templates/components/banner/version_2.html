@@ -1,0 +1,89 @@
+{% load static %}
+
+<!-- Page Title / Breadcrumbs -->
+<section class="bg-gray-100 py-10">
+  <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <h1 class="text-3xl font-bold">Projects Details</h1>
+
+    <nav class="text-gray-500">
+      <ol class="flex space-x-2">
+        <li><a href="{% url 'home' %}" class="hover:underline">Home</a></li>
+        <li>/</li>
+        <li class="font-semibold">{{ item.title }}</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- Portfolio Details -->
+<section class="py-16">
+  <div class="container mx-auto px-6">
+
+    <!-- Use flex-col on mobile, flex-row on md+ -->
+    <div class="flex flex-col md:flex-row md:space-x-4 items-start">
+
+      <!-- ================= LEFT : IMAGES ================= -->
+      <div class="w-full md:w-2/3 space-y-4">
+
+        <!-- Main Image -->
+        <div class="relative w-full aspect-[16/7] overflow-hidden rounded-lg shadow">
+  <img
+    id="mainImage"
+    src="{% static 'images/bg.png' %}"
+    alt="{{ item.title }}"
+    class="absolute inset-0 w-full h-full object-cover"
+  >
+</div>
+
+        <!-- Thumbnails (HIDDEN ON MOBILE) -->
+        <div class="hidden md:flex gap-3 w-full">
+          <img
+            src="{% static 'images/bg.png' %}"
+            onclick="changeImage(this)"
+            class="flex-1 h-36 object-cover rounded-3xl cursor-pointer border-2 border-transparent hover:border-blue-500"
+          >
+          <img
+            src="{% static 'images/food.jpg' %}"
+            onclick="changeImage(this)"
+            class="flex-1 h-36 object-cover rounded-3xl cursor-pointer border-2 border-transparent hover:border-blue-500"
+          >
+          <img
+            src="{% static 'images/616.jpg' %}"
+            onclick="changeImage(this)"
+            class="flex-1 h-36 object-cover rounded-3xl cursor-pointer border-2 border-transparent hover:border-blue-500"
+          >
+        </div>
+
+      </div>
+
+      <!-- ================= RIGHT : INFO ================= -->
+      <div class="w-full md:w-1/3 space-y-6 mt-6 md:mt-0">
+
+        <div class="bg-gray-50 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-4 border-b pb-2">
+            Project Information
+          </h3>
+          <ul class="space-y-2 text-gray-700">
+            <li><strong>Title:</strong> {{ item.title }}</li>
+            <li><strong>Category:</strong> {{ item.category }}</li>
+          </ul>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg shadow">
+          <h2 class="text-2xl font-bold mb-3">{{ item.title }}</h2>
+          <p class="text-gray-700 leading-relaxed">
+            {{ item.description }}
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  function changeImage(thumbnail) {
+    document.getElementById("mainImage").src = thumbnail.src;
+  }
+</script>

@@ -1,0 +1,75 @@
+{% load static %}
+
+<section
+  id="hero"
+  class="relative min-h-screen flex items-center bg-black
+         lg:ml-72"
+>
+  <!-- Background Image -->
+  <img
+    src="{% static 'images/bg.png' %}"
+    alt="Hero Background"
+    class="absolute inset-0 w-full h-full object-cover opacity-40"
+  />
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/10"></div>
+
+  <!-- Content -->
+  <div class="relative z-10 w-full px-6 md:px-16">
+    <div class="max-w-3xl">
+      <h2 class="text-[32px] md:text-[64px] font-bold text-white mb-4">
+       {{ profile.name }}
+      </h2>
+
+      <p class="text-[20px] md:text-[26px] text-gray-300">
+        I'm
+        <span
+        id="typed-text"
+        class="text-white font-semibold"
+        data-items="{% for role in roles %}
+                  {{ role.title }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}"
+
+        >
+         {{ roles.0.title }}
+        </span>
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+<script>
+  const el = document.getElementById("typed-text");
+  const items = el.dataset.items.split(",").map(i => i.trim());
+
+  let index = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function typeEffect() {
+    const current = items[index];
+
+    if (!deleting) {
+      el.textContent = current.slice(0, charIndex++);
+      if (charIndex > current.length) {
+        deleting = true;
+        setTimeout(typeEffect, 1000);
+        return;
+      }
+    } else {
+      el.textContent = current.slice(0, charIndex--);
+      if (charIndex === 0) {
+        deleting = false;
+        index = (index + 1) % items.length;
+      }
+    }
+
+    setTimeout(typeEffect, deleting ? 60 : 120);
+  }
+
+  typeEffect();
+</script>

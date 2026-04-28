@@ -1,0 +1,112 @@
+{% load static %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+<section id="portfolio" class="bg-gray-950 text-white py-20 overflow-x-hidden">
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Section Title -->
+    <div class="mb-14">
+      <h2 class="text-4xl font-bold mb-3">Portfolio</h2>
+      <p class="text-gray-400 max-w-4xl mb-6">
+        Magnam dolores commodi suscipit...
+      </p>
+
+      <ul class="flex gap-6 text-sm font-semibold">
+        <li class="filter-btn text-blue-400 border-b-2 border-blue-400 pb-1 cursor-pointer" data-filter="all">
+          All
+        </li>
+        <li class="filter-btn text-gray-400 hover:text-white cursor-pointer" data-filter="project">
+          Projects
+        </li>
+        <li class="filter-btn text-gray-400 hover:text-white cursor-pointer" data-filter="certificate">
+          Certificates
+        </li>
+      </ul>
+    </div>
+
+    <!-- Portfolio Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- ================= PROJECTS ================= -->
+      {% for project in projects %}
+      <div class="portfolio-item project group relative overflow-hidden rounded-xl">
+        <img src="{% static 'images/bg.png' %}"
+             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+             alt="{{ project.title }}">
+
+        <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-center px-4">
+          <h4 class="text-xl font-semibold mb-1">{{ project.title }}</h4>
+          <p class="text-gray-300 text-sm mb-4">{{ project.category }}</p>
+
+          <div class="flex gap-6 text-2xl">
+            <a href="{% static 'images/bg.png' %}" class="glightbox">🔍</a>
+            {% if project.slug %}
+              <a href="{% url 'project_detail' project.slug %}">🔗</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      <!-- ================= CERTIFICATES ================= -->
+      {% for cert in certificates %}
+      <div class="portfolio-item certificate group relative overflow-hidden rounded-xl">
+        <img src="{% static 'images/bg.png' %}"
+             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+             alt="{{ cert.title }}">
+
+        <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-center px-4">
+          <h4 class="text-xl font-semibold mb-1">{{ cert.title }}</h4>
+          <p class="text-gray-300 text-sm mb-4">{{ cert.category }}</p>
+
+          <div class="flex gap-6 text-2xl">
+            <a href="{% static 'images/bg.png' %}" class="glightbox">🔍</a>
+            {% if cert.slug %}
+              <a href="{% url 'certificate_detail' cert.slug %}">🔗</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  GLightbox({ selector: '.glightbox' });
+
+  const buttons = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.portfolio-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+
+      buttons.forEach(b => {
+        b.classList.remove('text-blue-400', 'border-b-2', 'border-blue-400');
+        b.classList.add('text-gray-400');
+      });
+
+      btn.classList.add('text-blue-400', 'border-b-2', 'border-blue-400');
+      btn.classList.remove('text-gray-400');
+
+      const filter = btn.dataset.filter;
+
+      items.forEach(item => {
+        item.classList.add('hidden');
+
+        if (filter === 'all' || item.classList.contains(filter)) {
+          item.classList.remove('hidden');
+        }
+      });
+
+    });
+  });
+
+});
+</script>

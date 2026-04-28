@@ -1,0 +1,20 @@
+
+
+{% extends 'base.html' %}
+{% block title %} | Portfolio {% endblock %}
+
+{% block content %}
+{% load static %}
+
+
+{% include 'components/navbar/version_1.html' %} 
+{% include 'components/hero/version_1.html' %} 
+<main class="lg:ml-72">
+{% include 'components/banner/version_1.html' %} 
+{% include 'components/resume/version_1.html' %} 
+{% include 'components/card/version_1.html' %} 
+
+
+</main>
+
+{% endblock %}

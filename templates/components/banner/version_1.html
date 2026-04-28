@@ -1,0 +1,69 @@
+{% load static %}
+<body class="scroll-smooth">
+<section id="about" class="relative bg-gray-950 text-white pt-8 pb-10  min-h-screen ">
+
+  
+  <!-- pt-28 = pushes content below fixed navbar -->
+
+  <div class="max-w-6xl mx-auto px-6">
+
+    <!-- Section Header (LEFT aligned) -->
+    <div class="mb-14">
+      <h2 class="text-4xl font-bold mb-3">About</h2>
+      <p class="text-gray-400 max-w-3xl">
+        Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.
+      </p>
+    </div>
+
+    <!-- Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+
+      <!-- Profile Image (LEFT) -->
+      <div class="flex justify-start">
+        <img
+          src="{{ profile.image.url }}"
+          alt="{{ profile.name }}"
+          class="w-64 h-64 rounded-2xl object-cover shadow-lg border border-gray-800"
+        />
+      </div>
+
+      <!-- Details (RIGHT) -->
+      <div class="lg:col-span-2">
+
+        <h3 class="text-2xl font-semibold mb-3">
+          {{ profile.title }}
+        </h3>
+
+        <p class="italic text-gray-400 mb-6">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+
+          <ul class="space-y-3">
+            <li><span class="text-blue-400">▶</span> <strong>Birthday:</strong> {{ profile.birthday|date:"j F Y" }}</li>
+            <!-- <li><span class="text-blue-400">▶</span> <strong>Website:</strong> {{ profile.website }}</li> -->
+            <li><span class="text-blue-400">▶</span> <strong>Phone:</strong> {{ profile.phone }}</li>
+            <li><span class="text-blue-400">▶</span> <strong>City:</strong> {{ profile.city }}</li>
+          </ul>
+
+          <ul class="space-y-3">
+            <li><span class="text-blue-400">▶</span> <strong>Age:</strong> {{ profile.age }}</li>
+            <li><span class="text-blue-400">▶</span> <strong>Degree:</strong> {{ profile.degree }}</li>
+            <li><span class="text-blue-400">▶</span> <strong>Email:</strong> {{ profile.email }}</li>
+            <!-- <li><span class="text-blue-400">▶</span> <strong>Freelance:</strong> {{ profile.freelance }}</li> -->
+          </ul>
+
+        </div>
+
+        <p class="mt-6 text-gray-400 leading-relaxed">
+          Officiis eligendi itaque labore et dolorum mollitia officiis optio vero.
+          Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore.
+        </p>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+</body>
