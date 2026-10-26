@@ -38,23 +38,35 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
         </p>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+        
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
 
-          <ul class="space-y-3">
-            <li><span class="text-blue-400">▶</span> <strong>Birthday:</strong> {{ profile.birthday|date:"j F Y" }}</li>
-            <!-- <li><span class="text-blue-400">▶</span> <strong>Website:</strong> {{ profile.website }}</li> -->
-            <li><span class="text-blue-400">▶</span> <strong>Phone:</strong> {{ profile.phone }}</li>
-            <li><span class="text-blue-400">▶</span> <strong>City:</strong> {{ profile.city }}</li>
-          </ul>
+    <ul class="space-y-3">
+        <!-- <li><span class="text-blue-400">▶</span> <strong>Birthday:</strong> {{ profile.birthday|date:"j F Y" }}</li> -->
+        <!-- <li><span class="text-blue-400">▶</span> <strong>Website:</strong> {{ profile.website }}</li> -->
+        <!-- <li><span class="text-blue-400">▶</span> <strong>Phone:</strong> {{ profile.phone }}</li> -->
 
-          <ul class="space-y-3">
-            <li><span class="text-blue-400">▶</span> <strong>Age:</strong> {{ profile.age }}</li>
-            <li><span class="text-blue-400">▶</span> <strong>Degree:</strong> {{ profile.degree }}</li>
-            <li><span class="text-blue-400">▶</span> <strong>Email:</strong> {{ profile.email }}</li>
-            <!-- <li><span class="text-blue-400">▶</span> <strong>Freelance:</strong> {{ profile.freelance }}</li> -->
-          </ul>
+        <li>
+            <span class="text-blue-400">▶</span>
+            <strong>City:</strong> {{ profile.city }}
+        </li>
 
-        </div>
+        <li>
+            <span class="text-blue-400">▶</span>
+            <strong>Degree:</strong> {{ profile.degree }}
+        </li>
+
+        <li>
+            <span class="text-blue-400">▶</span>
+            <strong>Email:</strong> {{ profile.email }}
+        </li>
+
+        <!-- <li><span class="text-blue-400">▶</span> <strong>Age:</strong> {{ profile.age }}</li> -->
+        <!-- <li><span class="text-blue-400">▶</span> <strong>Freelance:</strong> {{ profile.freelance }}</li> -->
+    </ul>
+
+</div>
+
 
         <p class="mt-6 text-gray-400 leading-relaxed">
           Officiis eligendi itaque labore et dolorum mollitia officiis optio vero.

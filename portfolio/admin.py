@@ -16,7 +16,7 @@ class ProfileAdmin(admin.ModelAdmin):
         "title",
         "city",
         "email",
-        "freelance",
+        
     )
 
 
