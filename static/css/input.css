@@ -1,6 +1,109 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
+
+body {
+  @apply bg-ink-950 text-slate-300 font-sans antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+  color: #fff;
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+
+  .section {
+    @apply relative py-20 sm:py-24 scroll-mt-16;
+  }
+
+  .eyebrow {
+    @apply font-mono text-xs sm:text-sm text-neon-cyan tracking-wider uppercase;
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-4xl font-bold text-white tracking-tight;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-cyan via-sky-400 to-neon-violet bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-white/[0.03] border border-white/10 backdrop-blur-sm;
+  }
+
+  .card-hover {
+    @apply transition duration-300 hover:-translate-y-1 hover:border-neon-cyan/40 hover:shadow-glow;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-ink-950
+           bg-gradient-to-r from-neon-cyan to-sky-400 transition duration-300
+           hover:shadow-glow hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-ink-950;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white
+           border border-white/15 bg-white/[0.03] transition duration-300
+           hover:border-neon-cyan/50 hover:text-neon-cyan focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 font-mono text-xs text-slate-300;
+  }
+
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+    mask-image: radial-gradient(ellipse at center, #000 30%, transparent 75%);
+  }
+}
+
+/* Scroll reveal: only hidden when JS is running, so content never disappears without JS */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .animate-float, .animate-blink { animation: none !important; }
+}
+
+/* Portfolio filter buttons */
+.filter-btn {
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.03);
+}
+.filter-btn:hover { color: #fff; border-color: rgba(34, 211, 238, 0.4); }
+.filter-btn.is-active {
+  color: #05070d;
+  border-color: transparent;
+  background: linear-gradient(90deg, #22d3ee, #38bdf8);
+}
+
+/* Nav active link */
+.nav-link.is-active { color: #22d3ee; background: rgba(255, 255, 255, 0.05); }
+
+/* Header gets a solid feel after scrolling */
+#site-header.is-scrolled nav { background: rgba(5, 7, 13, 0.9); box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.8); }

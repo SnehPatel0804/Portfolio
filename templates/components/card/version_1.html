@@ -1,112 +1,75 @@
 {% load static %}
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+<section id="portfolio" class="section bg-ink-900/60">
+  <div class="container-x">
 
-<section id="portfolio" class="bg-gray-950 text-white py-20 overflow-x-hidden">
-  <div class="max-w-6xl mx-auto px-6">
-
-    <!-- Section Title -->
-    <div class="mb-14">
-      <h2 class="text-4xl font-bold mb-3">Portfolio</h2>
-      <p class="text-gray-400 max-w-4xl mb-6">
-        Magnam dolores commodi suscipit...
-      </p>
-
-      <ul class="flex gap-6 text-sm font-semibold">
-        <li class="filter-btn text-blue-400 border-b-2 border-blue-400 pb-1 cursor-pointer" data-filter="all">
-          All
-        </li>
-        <li class="filter-btn text-gray-400 hover:text-white cursor-pointer" data-filter="project">
-          Projects
-        </li>
-        <li class="filter-btn text-gray-400 hover:text-white cursor-pointer" data-filter="certificate">
-          Certificates
-        </li>
-      </ul>
+    <div class="reveal mb-10 max-w-2xl">
+      <p class="eyebrow">// 03 — portfolio</p>
+      <h2 class="section-title mt-3">Projects &amp; Certificates</h2>
+      <p class="mt-4 text-slate-400">A selection of things I've built and credentials I've earned.</p>
     </div>
 
-    <!-- Portfolio Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Filters -->
+    <div class="reveal -mx-5 mb-10 overflow-x-auto px-5 sm:mx-0 sm:px-0" role="tablist" aria-label="Filter portfolio">
+      <div class="flex w-max gap-2">
+        <button type="button" data-filter="project"     class="filter-btn is-active rounded-full border px-5 py-2 text-sm font-semibold transition">Projects</button>
+        <button type="button" data-filter="certificate" class="filter-btn rounded-full border px-5 py-2 text-sm font-semibold transition">Certificates</button>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
       <!-- ================= PROJECTS ================= -->
       {% for project in projects %}
-      <div class="portfolio-item project group relative overflow-hidden rounded-xl">
-        <img src="{% static 'images/bg.png' %}"
-             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-             alt="{{ project.title }}">
-
-        <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-center px-4">
-          <h4 class="text-xl font-semibold mb-1">{{ project.title }}</h4>
-          <p class="text-gray-300 text-sm mb-4">{{ project.category }}</p>
-
-          <div class="flex gap-6 text-2xl">
-            <a href="{% static 'images/bg.png' %}" class="glightbox">🔍</a>
-            {% if project.slug %}
-              <a href="{% url 'project_detail' project.slug %}">🔗</a>
-            {% endif %}
-          </div>
+      <a href="{% url 'project_detail' project.slug %}"
+         class="portfolio-item project reveal group glass card-hover flex flex-col overflow-hidden rounded-2xl">
+        <div class="relative h-44 overflow-hidden bg-gradient-to-br {% cycle 'from-cyan-500/30 to-blue-700/20' 'from-violet-500/30 to-fuchsia-700/20' 'from-emerald-500/30 to-teal-700/20' %}">
+          <!-- Fallback (shown when there is no image) -->
+          <div class="absolute inset-0 grid-bg opacity-70"></div>
+          <svg class="absolute inset-x-0 bottom-0 h-24 w-full text-white/40" viewBox="0 0 300 80" preserveAspectRatio="none" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="0,70 40,52 80,58 120,30 160,40 200,18 240,26 300,6"/>
+          </svg>
+          <!-- Image from static/images/projects/<slug>.jpg|png|webp -->
+          <img data-img-base="{% static 'images/projects/' %}{{ project.slug }}" alt="{{ project.title }}"
+               class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+          <span class="absolute left-4 top-4 chip !bg-ink-950/70 !text-neon-cyan">Project</span>
         </div>
-      </div>
+        <div class="flex flex-1 flex-col p-5">
+          <p class="font-mono text-xs uppercase tracking-wider text-slate-500">{{ project.category }}</p>
+          <h3 class="mt-1 font-display text-lg font-semibold text-white transition group-hover:text-neon-cyan">{{ project.title }}</h3>
+          <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-400">{{ project.description }}</p>
+          <span class="mt-auto pt-4 text-sm font-semibold text-neon-cyan">View details <span class="inline-block transition group-hover:translate-x-1">→</span></span>
+        </div>
+      </a>
       {% endfor %}
 
       <!-- ================= CERTIFICATES ================= -->
       {% for cert in certificates %}
-      <div class="portfolio-item certificate group relative overflow-hidden rounded-xl">
-        <img src="{% static 'images/bg.png' %}"
-             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
-             alt="{{ cert.title }}">
-
-        <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition flex flex-col justify-center items-center text-center px-4">
-          <h4 class="text-xl font-semibold mb-1">{{ cert.title }}</h4>
-          <p class="text-gray-300 text-sm mb-4">{{ cert.category }}</p>
-
-          <div class="flex gap-6 text-2xl">
-            <a href="{% static 'images/bg.png' %}" class="glightbox">🔍</a>
-            {% if cert.slug %}
-              <a href="{% url 'certificate_detail' cert.slug %}">🔗</a>
-            {% endif %}
-          </div>
+      <a href="{% url 'certificate_detail' cert.slug %}"
+         class="portfolio-item certificate reveal group glass card-hover flex flex-col overflow-hidden rounded-2xl">
+        <div class="relative grid h-44 place-items-center overflow-hidden bg-gradient-to-br {% cycle 'from-amber-500/25 to-orange-700/15' 'from-sky-500/25 to-indigo-700/20' 'from-pink-500/25 to-rose-700/15' %}">
+          <!-- Fallback (shown when there is no image) -->
+          <div class="absolute inset-0 grid-bg opacity-70"></div>
+          <svg class="relative h-16 w-16 text-white/70" fill="none" stroke="currentColor" stroke-width="1.4" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5.5"/><path stroke-linecap="round" stroke-linejoin="round" d="m8.8 13.5-1.3 7 4.5-2.5 4.5 2.5-1.3-7"/></svg>
+          <!-- Image from static/images/certificates/<slug>.jpg|png|webp -->
+          <img data-img-base="{% static 'images/certificates/' %}{{ cert.slug }}" alt="{{ cert.title }}"
+               class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105">
+          <span class="absolute left-4 top-4 chip !bg-ink-950/70 !text-neon-violet">Certificate</span>
         </div>
-      </div>
+        <div class="flex flex-1 flex-col p-5">
+          <p class="font-mono text-xs uppercase tracking-wider text-slate-500">{{ cert.category }}{% if cert.issuer %} · {{ cert.issuer }}{% endif %}</p>
+          <h3 class="mt-1 font-display text-lg font-semibold text-white transition group-hover:text-neon-cyan">{{ cert.title }}</h3>
+          <p class="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-400">{{ cert.description }}</p>
+          <span class="mt-auto pt-4 text-sm font-semibold text-neon-cyan">View details <span class="inline-block transition group-hover:translate-x-1">→</span></span>
+        </div>
+      </a>
       {% endfor %}
-
     </div>
+
+    {% if not projects and not certificates %}
+    <p class="glass rounded-2xl p-8 text-center text-slate-500">Nothing here yet. Add projects and certificates from the admin panel.</p>
+    {% endif %}
+
   </div>
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-  GLightbox({ selector: '.glightbox' });
-
-  const buttons = document.querySelectorAll('.filter-btn');
-  const items = document.querySelectorAll('.portfolio-item');
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-
-      buttons.forEach(b => {
-        b.classList.remove('text-blue-400', 'border-b-2', 'border-blue-400');
-        b.classList.add('text-gray-400');
-      });
-
-      btn.classList.add('text-blue-400', 'border-b-2', 'border-blue-400');
-      btn.classList.remove('text-gray-400');
-
-      const filter = btn.dataset.filter;
-
-      items.forEach(item => {
-        item.classList.add('hidden');
-
-        if (filter === 'all' || item.classList.contains(filter)) {
-          item.classList.remove('hidden');
-        }
-      });
-
-    });
-  });
-
-});
-</script>

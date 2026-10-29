@@ -1,0 +1,20 @@
+<section id="contact" class="section">
+  <div class="container-x">
+    <div class="reveal relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-ink-800 to-ink-900 px-6 py-14 text-center sm:px-12 sm:py-16">
+      <div class="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-neon-cyan/20 blur-[90px]"></div>
+      <p class="eyebrow relative">// 04 — contact</p>
+      <h2 class="section-title relative mt-3">Let's build something <span class="gradient-text">intelligent</span></h2>
+      <p class="relative mx-auto mt-4 max-w-xl text-slate-400">Have a data or AI project in mind, or just want to say hi? My inbox is open.</p>
+      <div class="relative mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+        {% if profile.email %}
+        <a href="mailto:{{ profile.email }}" class="btn-primary w-full sm:w-auto">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="m3 7 9 6 9-6"/></svg>
+          Say hello
+        </a>
+        {% endif %}
+        <a href="https://www.linkedin.com/in/sneh-patel-346831215/" target="_blank" rel="noopener" class="btn-ghost w-full sm:w-auto">LinkedIn</a>
+        <a href="https://github.com/SnehPatel0804" target="_blank" rel="noopener" class="btn-ghost w-full sm:w-auto">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>

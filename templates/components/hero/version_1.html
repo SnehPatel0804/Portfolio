@@ -1,75 +1,107 @@
 {% load static %}
 
-<section
-  id="hero"
-  class="relative min-h-screen flex items-center bg-black
-         lg:ml-72"
->
-  <!-- Background Image -->
-  <img
-    src="{% static 'images/bg.png' %}"
-    alt="Hero Background"
-    class="absolute inset-0 w-full h-full object-cover opacity-40"
-  />
+<section id="hero" class="relative flex min-h-[100svh] items-center overflow-hidden pt-28 pb-16 sm:pt-32">
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black/10"></div>
+  <!-- Animated neural-network canvas (drawn by static/js/main.js) -->
+  <canvas id="neural-bg" class="absolute inset-0 h-full w-full" aria-hidden="true"></canvas>
+  <div class="pointer-events-none absolute inset-0 grid-bg" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -top-32 -left-32 h-96 w-96 rounded-full bg-neon-cyan/20 blur-[120px]" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-neon-violet/25 blur-[120px]" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink-950 to-transparent" aria-hidden="true"></div>
 
-  <!-- Content -->
-  <div class="relative z-10 w-full px-6 md:px-16">
-    <div class="max-w-3xl">
-      <h2 class="text-[32px] md:text-[64px] font-bold text-white mb-4">
-       {{ profile.name }}
-      </h2>
+  <div class="container-x relative z-10">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-8">
 
-      <p class="text-[20px] md:text-[26px] text-gray-300">
-        I'm
-        <span
-        id="typed-text"
-        class="text-white font-semibold"
-        data-items="{% for role in roles %}
-                  {{ role.title }}{% if not forloop.last %}, {% endif %}
-                {% endfor %}"
-
-        >
-         {{ roles.0.title }}
+      <!-- ============ LEFT : intro ============ -->
+      <div class="min-w-0">
+        <span class="chip mb-6 gap-2 !border-neon-cyan/30 !text-neon-cyan">
+          <span class="relative flex h-2 w-2">
+            <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon-mint opacity-75"></span>
+            <span class="relative inline-flex h-2 w-2 rounded-full bg-neon-mint"></span>
+          </span>
+          Data &amp; AI Portfolio
         </span>
-      </p>
+
+        <h1 class="font-display text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-7xl">
+          Hi, I'm <span class="gradient-text">{{ profile.name }}</span>
+        </h1>
+
+        <p class="mt-5 font-mono text-lg text-slate-300 sm:text-2xl">
+          <span class="text-neon-cyan">&gt;</span>
+          <span id="typed-text" class="font-semibold text-white">{{ roles.0.title }}</span><span class="animate-blink text-neon-cyan">|</span>
+        </p>
+
+        <!-- Roles list read by the typing script (kept in the DOM, visually hidden) -->
+        <ul id="roles-source" class="sr-only">
+          {% for role in roles %}<li>{{ role.title }}</li>{% endfor %}
+        </ul>
+
+        {% if profile.title %}
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-slate-400 sm:text-lg">
+          {{ profile.title }}
+        </p>
+        {% endif %}
+
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+          <a href="#portfolio" class="btn-primary">
+            View my work
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          {% if resume.resume_file %}
+          <a href="{{ resume.resume_file.url }}" download class="btn-ghost">
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>
+            Download resume
+          </a>
+          {% else %}
+          <a href="#contact" class="btn-ghost">Get in touch</a>
+          {% endif %}
+        </div>
+
+        <!-- Live counts from the database -->
+        <dl class="mt-12 grid max-w-md grid-cols-3 gap-3 sm:gap-4">
+          <div class="glass rounded-xl px-4 py-3">
+            <dt class="font-mono text-[11px] uppercase tracking-wider text-slate-500">Projects</dt>
+            <dd class="font-display text-2xl font-bold text-white sm:text-3xl">{{ projects|length }}</dd>
+          </div>
+          <div class="glass rounded-xl px-4 py-3">
+            <dt class="font-mono text-[11px] uppercase tracking-wider text-slate-500">Certs</dt>
+            <dd class="font-display text-2xl font-bold text-white sm:text-3xl">{{ certificates|length }}</dd>
+          </div>
+          <div class="glass rounded-xl px-4 py-3">
+            <dt class="font-mono text-[11px] uppercase tracking-wider text-slate-500">Years Exp</dt>
+             <dd class="font-display text-2xl font-bold text-white sm:text-3xl">2+</dd>
+          </div>
+        </dl>
+      </div>
+
+      <!-- ============ RIGHT : code card ============ -->
+      <div class="min-w-0 lg:justify-self-end w-full max-w-xl">
+        <div class="animate-float overflow-hidden rounded-2xl border border-white/10 bg-ink-900/80 shadow-glow-violet backdrop-blur-md">
+          <div class="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-4 py-3">
+            <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
+            <span class="h-3 w-3 rounded-full bg-yellow-400/80"></span>
+            <span class="h-3 w-3 rounded-full bg-green-400/80"></span>
+            <span class="ml-3 font-mono text-xs text-slate-500">profile.py</span>
+          </div>
+          <pre class="overflow-x-auto p-5 font-mono text-[12.5px] leading-7 sm:text-sm"><code><span class="text-neon-violet">class</span> <span class="text-neon-cyan">Engineer</span>:
+    name   = <span class="text-neon-mint">"{{ profile.name }}"</span>
+    {% if profile.city %}city   = <span class="text-neon-mint">"{{ profile.city }}"</span>
+    {% endif %}{% if profile.degree %}degree = <span class="text-neon-mint">"{{ profile.degree }}"</span>
+    {% endif %}focus  = [{% for role in roles %}
+        <span class="text-neon-mint">"{{ role.title }}"</span>,{% endfor %}
+    ]
+    status = <span class="text-neon-mint">"building with data"</span>
+
+<span class="text-slate-500"># let's build something intelligent</span>
+<span class="text-neon-violet">print</span>(Engineer.focus[<span class="text-amber-300">0</span>])</code></pre>
+        </div>
+      </div>
+
     </div>
   </div>
+
+  <!-- scroll cue -->
+  <a href="#about" class="absolute bottom-6 left-1/2 hidden -translate-x-1/2 text-slate-500 transition hover:text-neon-cyan sm:block" aria-label="Scroll to About">
+    <svg class="h-6 w-6 animate-bounce" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+  </a>
 </section>
-
-
-
-
-<script>
-  const el = document.getElementById("typed-text");
-  const items = el.dataset.items.split(",").map(i => i.trim());
-
-  let index = 0;
-  let charIndex = 0;
-  let deleting = false;
-
-  function typeEffect() {
-    const current = items[index];
-
-    if (!deleting) {
-      el.textContent = current.slice(0, charIndex++);
-      if (charIndex > current.length) {
-        deleting = true;
-        setTimeout(typeEffect, 1000);
-        return;
-      }
-    } else {
-      el.textContent = current.slice(0, charIndex--);
-      if (charIndex === 0) {
-        deleting = false;
-        index = (index + 1) % items.length;
-      }
-    }
-
-    setTimeout(typeEffect, deleting ? 60 : 120);
-  }
-
-  typeEffect();
-</script>

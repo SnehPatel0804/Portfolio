@@ -1,81 +1,101 @@
 {% load static %}
-<body class="scroll-smooth">
-<section id="about" class="relative bg-gray-950 text-white pt-8 pb-10  min-h-screen ">
 
-  
-  <!-- pt-28 = pushes content below fixed navbar -->
+<section id="about" class="section bg-ink-900/60">
+  <div class="container-x">
 
-  <div class="max-w-6xl mx-auto px-6">
-
-    <!-- Section Header (LEFT aligned) -->
-    <div class="mb-14">
-      <h2 class="text-4xl font-bold mb-3">About</h2>
-      <p class="text-gray-400 max-w-3xl">
-        Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.
-      </p>
+    <div class="reveal mb-12 max-w-2xl">
+      <p class="eyebrow">// 01 — about</p>
+      <h2 class="section-title mt-3">About me</h2>
+      <p class="mt-4 text-slate-400">Turning raw data into models, insights and intelligent products.</p>
     </div>
 
-    <!-- Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+    <div class="grid items-start gap-10 lg:grid-cols-[320px_1fr] lg:gap-14">
 
-      <!-- Profile Image (LEFT) -->
-      <div class="flex justify-start">
-        <img
-          src="{{ profile.image.url }}"
-          alt="{{ profile.name }}"
-          class="w-64 h-64 rounded-2xl object-cover shadow-lg border border-gray-800"
-        />
+      <!-- Profile photo -->
+      <div class="reveal mx-auto w-full max-w-[280px] lg:mx-0 lg:max-w-none">
+        <div class="relative">
+          <div class="absolute -inset-1 rounded-3xl bg-gradient-to-br from-neon-cyan via-sky-500 to-neon-violet opacity-60 blur-md"></div>
+          <img
+            src="{% if profile.image %}{{ profile.image.url }}{% else %}{% static 'images/sneh.png' %}{% endif %}"
+            alt="{{ profile.name }}"
+            class="relative aspect-square w-full rounded-3xl border border-white/10 bg-ink-800 object-cover"
+            loading="lazy"
+          />
+        </div>
       </div>
 
-      <!-- Details (RIGHT) -->
-      <div class="lg:col-span-2">
+      <!-- Details -->
+      <div class="reveal min-w-0">
+        <h3 class="font-display text-2xl font-semibold text-white sm:text-3xl">{{ profile.title }}</h3>
 
-        <h3 class="text-2xl font-semibold mb-3">
-          {{ profile.title }}
-        </h3>
+        {% if resume.summary_text %}
+        <p class="mt-4 leading-relaxed text-slate-400">{{ resume.summary_text }}</p>
+        {% endif %}
 
-        <p class="italic text-gray-400 mb-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-        </p>
+        <!-- key / value facts -->
+        <dl class="mt-8 grid gap-3 sm:grid-cols-2">
+          {% if profile.city %}
+          <div class="glass flex items-center gap-4 rounded-xl p-4">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-neon-cyan/10 text-neon-cyan">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </span>
+            <div class="min-w-0"><dt class="font-mono text-[11px] uppercase tracking-wider text-slate-500">City</dt><dd class="truncate font-medium text-white">{{ profile.city }}</dd></div>
+          </div>
+          {% endif %}
+          {% if profile.degree %}
+          <div class="glass flex items-center gap-4 rounded-xl p-4">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-neon-violet/10 text-neon-violet">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3 2 8l10 5 10-5-10-5ZM6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/></svg>
+            </span>
+            <div class="min-w-0"><dt class="font-mono text-[11px] uppercase tracking-wider text-slate-500">Degree</dt><dd class="truncate font-medium text-white">{{ profile.degree }}</dd></div>
+          </div>
+          {% endif %}
+          {% if profile.email %}
+          <div class="glass flex items-center gap-4 rounded-xl p-4 sm:col-span-2">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-neon-mint/10 text-neon-mint">
+              <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <div class="min-w-0"><dt class="font-mono text-[11px] uppercase tracking-wider text-slate-500">Email</dt><dd class="break-all font-medium text-white"><a href="mailto:{{ profile.email }}" class="hover:text-neon-cyan">{{ profile.email }}</a></dd></div>
+          </div>
+          {% endif %}
+        </dl>
+      </div>
+    </div>
 
-        
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+    <!-- Focus areas (generic text, edit freely) -->
+    <div class="mt-16 grid gap-5 md:grid-cols-3">
+      <div class="reveal glass card-hover rounded-2xl p-6">
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-neon-cyan/10 text-neon-cyan">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 20V10m6 10V4m6 16v-7m4 7H2"/></svg>
+        </span>
+        <h4 class="mt-4 font-display text-lg font-semibold text-white">Data Analysis</h4>
+        <p class="mt-2 text-sm leading-relaxed text-slate-400">Cleaning, exploring and visualising data to uncover patterns that drive decisions.</p>
+      </div>
+      <div class="reveal glass card-hover rounded-2xl p-6">
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-neon-violet/10 text-neon-violet">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="8" r="2"/><circle cx="19" cy="16" r="2"/><path stroke-linecap="round" d="M7 6.5 10.2 11M7 17.5l3.2-4.5M14 11l3.3-2M14 13l3.3 2"/></svg>
+        </span>
+        <h4 class="mt-4 font-display text-lg font-semibold text-white">Machine Learning</h4>
+        <p class="mt-2 text-sm leading-relaxed text-slate-400">Building, training and evaluating models that turn data into reliable predictions.</p>
+      </div>
+      <div class="reveal glass card-hover rounded-2xl p-6">
+        <span class="grid h-11 w-11 place-items-center rounded-xl bg-neon-mint/10 text-neon-mint">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3ZM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></svg>
+        </span>
+        <h4 class="mt-4 font-display text-lg font-semibold text-white">AI Applications</h4>
+        <p class="mt-2 text-sm leading-relaxed text-slate-400">Shipping practical AI features and Python / Django apps people can actually use.</p>
+      </div>
+    </div>
 
-    <ul class="space-y-3">
-        <!-- <li><span class="text-blue-400">▶</span> <strong>Birthday:</strong> {{ profile.birthday|date:"j F Y" }}</li> -->
-        <!-- <li><span class="text-blue-400">▶</span> <strong>Website:</strong> {{ profile.website }}</li> -->
-        <!-- <li><span class="text-blue-400">▶</span> <strong>Phone:</strong> {{ profile.phone }}</li> -->
-
-        <li>
-            <span class="text-blue-400">▶</span>
-            <strong>City:</strong> {{ profile.city }}
-        </li>
-
-        <li>
-            <span class="text-blue-400">▶</span>
-            <strong>Degree:</strong> {{ profile.degree }}
-        </li>
-
-        <li>
-            <span class="text-blue-400">▶</span>
-            <strong>Email:</strong> {{ profile.email }}
-        </li>
-
-        <!-- <li><span class="text-blue-400">▶</span> <strong>Age:</strong> {{ profile.age }}</li> -->
-        <!-- <li><span class="text-blue-400">▶</span> <strong>Freelance:</strong> {{ profile.freelance }}</li> -->
-    </ul>
-
-</div>
-
-
-        <p class="mt-6 text-gray-400 leading-relaxed">
-          Officiis eligendi itaque labore et dolorum mollitia officiis optio vero.
-          Quisquam sunt adipisci omnis et ut. Nulla accusantium dolor incidunt officia tempore.
-        </p>
-
+    <!-- Tech stack (generic list, edit freely) -->
+    <div class="reveal mt-12">
+      <p class="mb-4 font-mono text-xs uppercase tracking-wider text-slate-500">Toolkit</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Pandas</span><span class="chip">NumPy</span>
+        <span class="chip">Scikit-learn</span><span class="chip">TensorFlow</span><span class="chip">PyTorch</span><span class="chip">Power BI</span>
+        <span class="chip">Jupyter</span><span class="chip">Django</span><span class="chip">Git</span>
       </div>
     </div>
 
   </div>
 </section>
-</body>
