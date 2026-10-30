@@ -58,9 +58,57 @@
     reveals.forEach(function (el) { el.classList.add('is-visible'); });
   }
 
-  /* ---------- Portfolio tabs (Projects / Certificates) ---------- */
+  /* ---------- Portfolio tabs (Projects / Certificates) + mobile carousel ---------- */
   var filterBtns = document.querySelectorAll('.filter-btn');
   var items = document.querySelectorAll('.portfolio-item');
+  var track = document.getElementById('portfolio-track');
+  var prevBtn = document.getElementById('portfolio-prev');
+  var nextBtn = document.getElementById('portfolio-next');
+  var controls = document.getElementById('portfolio-controls');
+  var curEl = document.getElementById('portfolio-current');
+  var totEl = document.getElementById('portfolio-total');
+
+  var visibleItems = function () {
+    return Array.prototype.filter.call(items, function (it) { return !it.classList.contains('hidden'); });
+  };
+  var stepSize = function () {
+    var v = visibleItems();
+    if (v.length > 1) return v[1].offsetLeft - v[0].offsetLeft;
+    return track ? track.clientWidth : 1;
+  };
+  var currentIndex = function () {
+    return Math.max(0, Math.min(visibleItems().length - 1, Math.round(track.scrollLeft / stepSize())));
+  };
+  var updateCarousel = function () {
+    if (!track || !controls) return;
+    var total = visibleItems().length, idx = currentIndex();
+    controls.classList.toggle('invisible', total <= 1);
+    if (curEl) curEl.textContent = total ? idx + 1 : 0;
+    if (totEl) totEl.textContent = total;
+    if (prevBtn) prevBtn.disabled = idx <= 0;
+    if (nextBtn) nextBtn.disabled = idx >= total - 1;
+  };
+  var pending = null, pendingTimer;
+  var goTo = function (i) {
+    var total = visibleItems().length;
+    pending = Math.max(0, Math.min(total - 1, i));
+    track.scrollTo({ left: pending * stepSize(), behavior: 'smooth' });
+    clearTimeout(pendingTimer);
+    pendingTimer = setTimeout(function () { pending = null; }, 800);
+  };
+  // while a smooth scroll is still running, quick taps build on the target card
+  var baseIndex = function () { return pending !== null ? pending : currentIndex(); };
+  if (track) {
+    var ticking = false;
+    track.addEventListener('scroll', function () {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () { updateCarousel(); ticking = false; });
+    }, { passive: true });
+    if (prevBtn) prevBtn.addEventListener('click', function () { goTo(baseIndex() - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(baseIndex() + 1); });
+    window.addEventListener('resize', updateCarousel);
+  }
+
   var applyFilter = function (f) {
     filterBtns.forEach(function (x) { x.classList.toggle('is-active', x.dataset.filter === f); });
     items.forEach(function (it) {
@@ -68,6 +116,12 @@
       it.classList.toggle('hidden', !show);
       if (show) it.classList.add('is-visible');
     });
+    if (track) {
+      track.style.scrollBehavior = 'auto';
+      track.scrollLeft = 0;
+      track.style.scrollBehavior = '';
+      updateCarousel();
+    }
   };
   if (filterBtns.length) {
     // hide a tab if it has nothing in it

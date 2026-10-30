@@ -107,3 +107,7 @@ body {
 
 /* Header gets a solid feel after scrolling */
 #site-header.is-scrolled nav { background: rgba(5, 7, 13, 0.9); box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.8); }
+
+/* Hide scrollbar on the mobile carousel (still swipeable) */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
